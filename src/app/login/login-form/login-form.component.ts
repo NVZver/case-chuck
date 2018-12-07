@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-form',
@@ -11,7 +12,9 @@ export class LoginFormComponent implements OnInit {
   inputUserName: FormControl;
   inputPassword: FormControl;
 
-  constructor() {
+  constructor(
+    private router: Router
+  ) {
     this.inputUserName = new FormControl('', [
       Validators.required
     ]);
@@ -29,7 +32,7 @@ export class LoginFormComponent implements OnInit {
   }
 
   submit() {
-
+    this.router.navigate(['jokes']);
   }
 
   validatePassword(control: AbstractControl): { [key: string]: any } | null {
