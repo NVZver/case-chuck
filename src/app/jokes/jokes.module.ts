@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { JokesPageComponent } from './jokes-page/jokes-page.component';
+import { JokesListComponent } from './jokes-list/jokes-list.component';
 import { JokesService } from 'src/app/jokes/services/jokes.service';
 
 @NgModule({
@@ -8,7 +9,8 @@ import { JokesService } from 'src/app/jokes/services/jokes.service';
     CommonModule
   ],
   declarations: [
-    JokesPageComponent
+    JokesPageComponent,
+    JokesListComponent
   ],
   exports: [
     JokesPageComponent
