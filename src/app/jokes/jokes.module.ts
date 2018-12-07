@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { JokesPageComponent } from './jokes-page/jokes-page.component';
+import { JokesService } from 'src/app/jokes/services/jokes.service';
 
 @NgModule({
   imports: [
@@ -11,6 +12,9 @@ import { JokesPageComponent } from './jokes-page/jokes-page.component';
   ],
   exports: [
     JokesPageComponent
+  ],
+  providers: [
+    JokesService
   ]
 })
 export class JokesModule { }
