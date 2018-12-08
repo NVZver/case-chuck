@@ -21,5 +21,15 @@
     &__content {
       flex-grow: 1;
     }
+
+    &__actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    &__count {
+      color: #999999;
+    }
   }
 }

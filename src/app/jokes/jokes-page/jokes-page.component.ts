@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { JokesService } from 'src/app/jokes/services/jokes.service';
 import { Joke } from '../models/joke';
 import { interval, Subject } from 'rxjs';
 import { mergeMap, map, takeUntil } from 'rxjs/operators';
+
+const INTERVAL = 5000;
+const FAVORITE_JOKES__COUNT_MAX = 10;
 
 @Component({
   selector: 'app-jokes-page',
@@ -10,9 +13,10 @@ import { mergeMap, map, takeUntil } from 'rxjs/operators';
   styleUrls: ['./jokes-page.component.scss']
 })
 export class JokesPageComponent implements OnInit {
+  favoriteJokesMax = FAVORITE_JOKES__COUNT_MAX;
   jokes: Joke[] = [];
   favoriteJokes: Joke[] = [];
-  timer = interval(5000).pipe(
+  timer = interval(INTERVAL).pipe(
     mergeMap(() => this.getJokes(1)),
     map(jokes => jokes[0])
   );
@@ -28,9 +32,13 @@ export class JokesPageComponent implements OnInit {
   }
 
   favoriteAdd(joke: Joke) {
-    if (this.favoriteJokes.length < 10) {
+    if (!this.isFavoriteListFull()) {
       this.favoriteJokes.push(joke);
     }
+  }
+
+  isFavoriteListFull(): boolean {
+    return this.favoriteJokes.length === FAVORITE_JOKES__COUNT_MAX;
   }
 
   favoriteDelete(joke: Joke) {
@@ -71,7 +79,7 @@ export class JokesPageComponent implements OnInit {
     this.timer.pipe(
       takeUntil(this._storTimer$)
     ).subscribe((joke: Joke) => {
-      if (this.favoriteJokes.length === 9) {
+      if (this.isFavoriteListFull()) {
         this.stopJokeTimer();
       } else {
         this.favoriteAdd(joke);
