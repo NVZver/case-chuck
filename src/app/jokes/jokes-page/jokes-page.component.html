@@ -1,8 +1,26 @@
 <div class="jokes-page">
-  <div class="jokes-list">
-    <app-jokes-list [jokes]="jokes" (jokeSelected)="favoriteAdd($event)"></app-jokes-list>
-  </div>
-  <div class="jokes-list">
-    <app-jokes-list [jokes]="favoriteJokes" [isFavorite]="true" (jokeSelected)="favoriteDelete($event)"></app-jokes-list>
-  </div>
+  <mat-card class="jokes-list">
+    <mat-card-header class="jokes-list__header">
+      <mat-card-title>Jokes</mat-card-title>
+      <button mat-icon-button (click)="refreshJokes()">
+        <mat-icon>refresh</mat-icon>
+      </button>
+    </mat-card-header>
+    <mat-card-content>
+      <app-jokes-list [jokes]="jokes" [favoriteIds]="getFavoriteIds()"
+        (jokeSelected)="favoriteAdd($event)"></app-jokes-list>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="jokes-list">
+    <mat-card-header class="jokes-list__header">
+      <mat-card-title>Favorite jokes</mat-card-title>
+      <mat-slide-toggle (change)="switchTimer($event)" [labelPosition]='"before"'>Add
+        jokes every 5 sec</mat-slide-toggle>
+    </mat-card-header>
+    <mat-card-content>
+      <app-jokes-list [jokes]="favoriteJokes" [favoriteMode]="true"
+        (jokeSelected)="favoriteDelete($event)"></app-jokes-list>
+    </mat-card-content>
+  </mat-card>
 </div>

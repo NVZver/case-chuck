@@ -1,0 +1,25 @@
+.jokes {
+  &-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &--favorite {
+      background-color: lightcoral;
+    }
+  }
+
+  &-icon {
+    color: #EEEEEE;
+
+    &:hover {
+      color: #666666;
+    }
+
+    &__favorite {
+      &--active {
+        color: lightcoral;
+      }
+    }
+  }
+}

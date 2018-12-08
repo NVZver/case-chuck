@@ -8,7 +8,8 @@ import { Joke } from '../models/joke';
 })
 export class JokesListComponent implements OnInit {
   @Input() jokes: Joke[];
-  @Input() isFavorite = false;
+  @Input() favoriteIds: number[] = [];
+  @Input() favoriteMode = false;
   @Output() jokeSelected: EventEmitter<Joke> = new EventEmitter();
 
   constructor() { }
@@ -17,10 +18,16 @@ export class JokesListComponent implements OnInit {
   }
 
   favoriteAdd(joke: Joke) {
-    this.jokeSelected.emit(joke);
+    if (!this.isFavorite(joke.id)) {
+      this.jokeSelected.emit(joke);
+    }
   }
 
   getIcon() {
-    return this.isFavorite ? 'clear' : 'favorite';
+    return this.favoriteMode ? 'clear' : 'favorite';
+  }
+
+  isFavorite(jokeId: number): boolean {
+    return this.favoriteIds.includes(jokeId);
   }
 }

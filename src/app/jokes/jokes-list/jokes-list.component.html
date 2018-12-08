@@ -1,12 +1,13 @@
-<div class="jokes-list">
+<mat-list class="jokes-list">
   <div class="jokes-item" *ngFor="let joke of jokes">
     <div class="jokes-item__text">
       {{joke.joke}}
     </div>
     <div class="jokes-item__actions">
-      <button mat-icon-button (click)="favoriteAdd(joke)">
-        <mat-icon>{{getIcon()}}</mat-icon>
+      <button mat-icon-button (click)="favoriteAdd(joke)" [disabled]="isFavorite(joke.id)">
+        <mat-icon class="jokes-icon jokes-icon__favorite"
+          [class.jokes-icon__favorite--active]="isFavorite(joke.id)">{{getIcon()}}</mat-icon>
       </button>
     </div>
   </div>
-</div>
+</mat-list>
