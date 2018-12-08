@@ -63,6 +63,10 @@ export class JokesPageComponent implements OnInit {
 
   }
 
+  clearFavoriteJokes() {
+    this.favoriteJokes = [];
+  }
+
   private startJokeTimer() {
     this.timer.pipe(
       takeUntil(this._storTimer$)

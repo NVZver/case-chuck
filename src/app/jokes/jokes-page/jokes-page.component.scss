@@ -7,10 +7,19 @@
     flex-basis: 50%;
     margin: 0px 5px 0px 10px;
 
+    &--favorite {
+      display: flex;
+      flex-direction: column;
+    }
+
     &__header {
       display: flex;
       justify-content: space-between;
       align-items: center;
+    }
+
+    &__content {
+      flex-grow: 1;
     }
   }
 }

@@ -12,15 +12,19 @@
     </mat-card-content>
   </mat-card>
 
-  <mat-card class="jokes-list">
+  <mat-card class="jokes-list jokes-list--favorite">
     <mat-card-header class="jokes-list__header">
       <mat-card-title>Favorite jokes</mat-card-title>
       <mat-slide-toggle (change)="switchTimer($event)" [labelPosition]='"before"'>Add
         jokes every 5 sec</mat-slide-toggle>
     </mat-card-header>
-    <mat-card-content>
+    <mat-card-content class="jokes-list__content">
       <app-jokes-list [jokes]="favoriteJokes" [favoriteMode]="true"
         (jokeSelected)="favoriteDelete($event)"></app-jokes-list>
     </mat-card-content>
+    <mat-card-actions>
+      <button mat-stroked-button (click)="clearFavoriteJokes(favoriteJokes)"
+        [disabled]="!favoriteJokes.length">Clear</button>
+    </mat-card-actions>
   </mat-card>
 </div>
