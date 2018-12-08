@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { LoginModule } from 'src/app/login/login.module';
 import { JokesModule } from 'src/app/jokes/jokes.module';
+import { ToolbarModule } from 'src/app/toolbar/toolbar.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { JokesModule } from 'src/app/jokes/jokes.module';
     HttpClientModule,
     AppRoutingModule,
     LoginModule,
-    JokesModule
+    JokesModule,
+    ToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
