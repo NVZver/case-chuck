@@ -1,3 +1,8 @@
-<p>
-  jokes-page works!
-</p>
+<div class="jokes-page">
+  <div class="jokes-list">
+    <app-jokes-list [jokes]="jokes" (jokeSelected)="favoriteAdd($event)"></app-jokes-list>
+  </div>
+  <div class="jokes-list">
+    <app-jokes-list [jokes]="favoriteJokes" [isFavorite]="true" (jokeSelected)="favoriteDelete($event)"></app-jokes-list>
+  </div>
+</div>

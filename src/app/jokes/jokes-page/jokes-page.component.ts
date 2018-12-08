@@ -9,6 +9,7 @@ import { Joke } from '../models/joke';
 })
 export class JokesPageComponent implements OnInit {
   jokes: Joke[] = [];
+  favoriteJokes: Joke[] = [];
 
   constructor(
     private jokesService: JokesService
@@ -17,8 +18,18 @@ export class JokesPageComponent implements OnInit {
   ngOnInit() {
     this.getJokes();
   }
+  favoriteAdd(joke: Joke) {
+    this.favoriteJokes.push(joke);
+  }
 
-  getJokes() {
+  favoriteDelete(joke: Joke) {
+    const jokeId = this.favoriteJokes.findIndex((item: Joke) => item.id === joke.id);
+    if (jokeId !== -1) {
+      this.favoriteJokes.splice(jokeId, 1);
+    }
+  }
+
+  private getJokes() {
     this.jokesService.getJokes()
       .subscribe({
         next: res => {

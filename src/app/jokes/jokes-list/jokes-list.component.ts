@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Joke } from '../models/joke';
 
 @Component({
@@ -8,9 +8,19 @@ import { Joke } from '../models/joke';
 })
 export class JokesListComponent implements OnInit {
   @Input() jokes: Joke[];
+  @Input() isFavorite = false;
+  @Output() jokeSelected: EventEmitter<Joke> = new EventEmitter();
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  favoriteAdd(joke: Joke) {
+    this.jokeSelected.emit(joke);
+  }
+
+  getIcon() {
+    return this.isFavorite ? 'clear' : 'favorite';
+  }
 }
