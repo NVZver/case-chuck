@@ -51,7 +51,7 @@ export class LoginFormComponent implements OnInit {
 
   submit() {
     if (this.formLogin.valid) {
-      this.userService.user.name = this.inputUserName.value;
+      this.userService.setName(this.inputUserName.value);
       this.router.navigate(['home']);
     }
   }

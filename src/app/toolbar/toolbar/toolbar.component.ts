@@ -10,7 +10,7 @@ import { UserService } from 'src/app/services/user/user.service';
 export class ToolbarComponent implements OnInit {
 
   get userName(): string {
-    return this.userService.user.name;
+    return this.userService.name;
   }
 
   constructor(
