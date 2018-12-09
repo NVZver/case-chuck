@@ -4,9 +4,8 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { HomeModule } from 'src/app/home/home.module';
 import { LoginModule } from 'src/app/login/login.module';
-import { JokesModule } from 'src/app/jokes/jokes.module';
-import { ToolbarModule } from 'src/app/toolbar/toolbar.module';
 
 @NgModule({
   declarations: [
@@ -18,8 +17,7 @@ import { ToolbarModule } from 'src/app/toolbar/toolbar.module';
     HttpClientModule,
     AppRoutingModule,
     LoginModule,
-    JokesModule,
-    ToolbarModule
+    HomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

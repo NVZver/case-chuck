@@ -2,7 +2,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 import { LoginPageComponent } from 'src/app/login/login-page/login-page.component';
-import { JokesPageComponent } from 'src/app/jokes/jokes-page/jokes-page.component';
+import { HomePageComponent } from 'src/app/home/home-page/home-page.component';
 
 const routes: Routes = [
     {
@@ -10,8 +10,9 @@ const routes: Routes = [
         component: LoginPageComponent
     },
     {
-        path: 'jokes',
-        component: JokesPageComponent
+        path: 'home',
+        // loadChildren: 'app/home/home.module#HomeModule'
+        component: HomePageComponent
     },
     {
         path: '',

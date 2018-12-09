@@ -32,7 +32,7 @@ export class LoginFormComponent implements OnInit {
   }
 
   submit() {
-    this.router.navigate(['jokes']);
+    this.router.navigate(['home']);
   }
 
   validatePassword(control: AbstractControl): { [key: string]: any } | null {

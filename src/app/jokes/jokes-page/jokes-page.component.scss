@@ -1,11 +1,11 @@
 .jokes {
   &-page {
     display: flex;
+    justify-content: space-around;
   }
 
   &-list {
-    flex-basis: 50%;
-    margin: 0px 5px 0px 10px;
+    flex-basis: 45%;
 
     &--favorite {
       display: flex;
