@@ -8,6 +8,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { CommonModule } from '@angular/common';
 import { LoginService } from 'src/app/login/services/login.service';
+import { UserService } from 'src/app/services/user/user.service';
 
 @NgModule({
     declarations: [
@@ -27,7 +28,8 @@ import { LoginService } from 'src/app/login/services/login.service';
         LoginPageComponent
     ],
     providers: [
-        LoginService
+        LoginService,
+        UserService
     ],
     bootstrap: []
 })

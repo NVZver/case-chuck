@@ -2,6 +2,9 @@
   <mat-toolbar-row class="toolbar">
     <span>Chuck Norris Jokes</span>
     <div class="toolbar-account">
+      <mat-icon>account_circle</mat-icon>
+      <span>{{userName}}</span>
+
       <button mat-icon-button (click)="logout()">
         <mat-icon (click)="logout()">input</mat-icon>
       </button>

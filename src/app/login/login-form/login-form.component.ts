@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { TRICKY_CHARACTERS } from 'src/app/login/login-form/constants';
 import { ErrorStateMatcher } from '@angular/material';
 import { LoginService } from 'src/app/login/services/login.service';
+import { UserService } from 'src/app/services/user/user.service';
 
 export class ImmediateErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -26,7 +27,8 @@ export class LoginFormComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private userService: UserService
   ) {
     this.inputUserName = new FormControl('', [
       Validators.required
@@ -49,6 +51,7 @@ export class LoginFormComponent implements OnInit {
 
   submit() {
     if (this.formLogin.valid) {
+      this.userService.user.name = this.inputUserName.value;
       this.router.navigate(['home']);
     }
   }

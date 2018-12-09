@@ -13,6 +13,7 @@ import { RouteTestingModule } from 'src/app/testing/route/route-testing.module';
 import { RouterStub } from 'src/app/testing/route/router-stubs';
 import { Router } from '@angular/router';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { UserService } from 'src/app/services/user/user.service';
 
 describe('LoginFormComponent', () => {
   let component: LoginFormComponent;
@@ -31,8 +32,8 @@ describe('LoginFormComponent', () => {
       ],
       declarations: [LoginFormComponent],
       providers: [
-        { provide: Router, useClass: RouterStub }
-
+        { provide: Router, useClass: RouterStub },
+        UserService
       ]
     })
       .compileComponents();
