@@ -4,6 +4,9 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { JokesListComponent } from './jokes-list.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatCardModule } from '@angular/material/card';
 
 describe('JokesListComponent', () => {
   let component: JokesListComponent;
@@ -11,9 +14,14 @@ describe('JokesListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ JokesListComponent ]
+      imports: [
+        MatIconModule,
+        MatListModule,
+        MatCardModule
+      ],
+      declarations: [JokesListComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

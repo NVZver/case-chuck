@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { CommonModule } from '@angular/common';
+import { LoginService } from 'src/app/login/services/login.service';
 
 @NgModule({
     declarations: [
@@ -25,7 +26,9 @@ import { CommonModule } from '@angular/common';
     exports: [
         LoginPageComponent
     ],
-    providers: [],
+    providers: [
+        LoginService
+    ],
     bootstrap: []
 })
 export class LoginModule { }

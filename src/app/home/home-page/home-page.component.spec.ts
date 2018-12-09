@@ -4,6 +4,9 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { HomePageComponent } from './home-page.component';
+import { RouteTestingModule } from 'src/app/testing/route/route-testing.module';
+import { ToolbarTestingModule } from 'src/app/toolbar/toolbar-testing.module';
+import { JokesTestingModule } from 'src/app/jokes/jokes-testing.module';
 
 describe('HomePageComponent', () => {
   let component: HomePageComponent;
@@ -11,9 +14,14 @@ describe('HomePageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomePageComponent ]
+      imports: [
+        ToolbarTestingModule,
+        JokesTestingModule,
+        RouteTestingModule
+      ],
+      declarations: [HomePageComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

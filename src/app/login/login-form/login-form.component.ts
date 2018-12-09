@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormGroupDirective, NgForm, Validators, AbstractControl } from '@angular/forms';
 import { Router } from '@angular/router';
-import { TRICKY_CHARACTERS, ALPHABET } from 'src/app/login/login-form/constants';
+import { TRICKY_CHARACTERS } from 'src/app/login/login-form/constants';
 import { ErrorStateMatcher } from '@angular/material';
+import { LoginService } from 'src/app/login/services/login.service';
 
 export class ImmediateErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -24,7 +25,8 @@ export class LoginFormComponent implements OnInit {
   errorMatcher = new ImmediateErrorStateMatcher();
 
   constructor(
-    private router: Router
+    private router: Router,
+    private loginService: LoginService
   ) {
     this.inputUserName = new FormControl('', [
       Validators.required
@@ -64,7 +66,7 @@ export class LoginFormComponent implements OnInit {
 
   validateIncreasingLetters(control: AbstractControl): { [key: string]: any } | null {
     if (control.touched || control.dirty) {
-      if (!this.includesIncreasingLetters(control.value)) {
+      if (!this.loginService.includesIncreasingLetters(control.value)) {
         return {
           'missedIncreasingLetters': 'Password must include increasing letters'
         };
@@ -75,7 +77,7 @@ export class LoginFormComponent implements OnInit {
 
   validateTrickyLetters(control: AbstractControl): { [key: string]: any } | null {
     if (control.touched || control.dirty) {
-      if (this.includesTrickyLetters(control.value)) {
+      if (this.loginService.includesTrickyLetters(control.value)) {
         return {
           'trickyLetters': `Password includes tricke characters: ${TRICKY_CHARACTERS}`
         };
@@ -86,7 +88,7 @@ export class LoginFormComponent implements OnInit {
 
   validateNonOverlappingPairs(control: AbstractControl): { [key: string]: any } | null {
     if (control.touched || control.dirty) {
-      if (!this.includesNonOverlappingPairs(control.value)) {
+      if (!this.loginService.includesNonOverlappingPairs(control.value)) {
         return {
           'nonOverlappingPairs': `Password must include non-overlapping pairs`
         };
@@ -97,7 +99,7 @@ export class LoginFormComponent implements OnInit {
 
   validateOnlyLoverCaseCharacters(control: AbstractControl): { [key: string]: any } | null {
     if (control.touched || control.dirty) {
-      if (this.includesUpperCaseLetters(control.value)) {
+      if (this.loginService.includesUpperCaseLetters(control.value)) {
         return {
           'upperCaseLetters': `Your password includes charackers in Upper case`
         };
@@ -105,48 +107,4 @@ export class LoginFormComponent implements OnInit {
     }
     return null;
   }
-
-  includesIncreasingLetters(str: string): boolean {
-    let result = false;
-    const step = 3;
-    const rowEnd = str.length - step;
-    if (str.length >= 3) {
-      for (let i = 0; i <= rowEnd; i++) {
-        const subStr = str.slice(i, i + step);
-        if (ALPHABET.includes(subStr)) {
-          result = true;
-          break;
-        }
-      }
-    }
-    return result;
-  }
-
-  includesTrickyLetters(str: string): boolean {
-    let result = false;
-    for (let i = 0; i < TRICKY_CHARACTERS.length; i++) {
-      if (str.includes(TRICKY_CHARACTERS[i])) {
-        result = true;
-        break;
-      }
-    }
-    return result;
-  }
-
-  includesNonOverlappingPairs(str: string): boolean {
-    let result = false;
-    for (let i = 1; i < str.length; i++) {
-      if (str[i] === str[i - 1]) {
-        result = true;
-        break;
-      }
-    }
-    return result;
-  }
-
-  includesUpperCaseLetters(str: string): boolean {
-    const regEx = /[A-Z]/g;
-    return regEx.test(str);
-  }
-
 }

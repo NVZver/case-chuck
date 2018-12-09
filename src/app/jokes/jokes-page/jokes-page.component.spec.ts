@@ -4,6 +4,13 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { JokesPageComponent } from './jokes-page.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { JokesListStubComponent } from 'src/app/jokes/jokes-list/jokes-list-stub.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { JokesStubService } from 'src/app/jokes/services/jokes-stub.service';
+import { JokesService } from 'src/app/jokes/services/jokes.service';
+import { JokesTestingModule } from 'src/app/jokes/jokes-testing.module';
 
 describe('JokesPageComponent', () => {
   let component: JokesPageComponent;
@@ -11,9 +18,17 @@ describe('JokesPageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ JokesPageComponent ]
+      imports: [
+        MatCardModule,
+        MatIconModule,
+        MatSlideToggleModule
+      ],
+      declarations: [JokesPageComponent, JokesListStubComponent],
+      providers: [
+        // { provade: JokesService, useClass: JokesStubService }
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
