@@ -9,8 +9,9 @@
           [formControlName]="'userName'">
       </mat-form-field>
       <mat-form-field>
-        <input matInput class="login-input" type="password" placeholder="Password"
-          [formControlName]="'password'">
+        <input matInput class="login-input" type="password" [maxlength]="maxPasswordLength"
+          placeholder="Password" [formControlName]="'password'">
+        <mat-hint>{{inputPassword.value.length}} / {{maxPasswordLength}}</mat-hint>
       </mat-form-field>
 
     </form>
