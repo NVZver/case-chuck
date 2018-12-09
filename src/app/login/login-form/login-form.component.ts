@@ -33,6 +33,7 @@ export class LoginFormComponent implements OnInit {
       this.validateIncreasingLetters.bind(this),
       this.validateTrickyLetters.bind(this),
       this.validateOnlyLoverCaseCharacters.bind(this),
+      this.validateNonOverlappingPairs.bind(this),
       Validators.required
     ]);
     this.formLogin = new FormGroup({
@@ -45,8 +46,9 @@ export class LoginFormComponent implements OnInit {
   }
 
   submit() {
-    // this.router.navigate(['home']);
-    console.log(this.inputPassword.errors);
+    if (this.formLogin.valid) {
+      this.router.navigate(['home']);
+    }
   }
 
   getControlErrors(formControl: FormControl): string[] {
@@ -64,7 +66,7 @@ export class LoginFormComponent implements OnInit {
     if (control.touched || control.dirty) {
       if (!this.includesIncreasingLetters(control.value)) {
         return {
-          'missedIncreasingLetters': 'Your password does not include increasing letters'
+          'missedIncreasingLetters': 'Password must include increasing letters'
         };
       }
     }
@@ -75,7 +77,18 @@ export class LoginFormComponent implements OnInit {
     if (control.touched || control.dirty) {
       if (this.includesTrickyLetters(control.value)) {
         return {
-          'trickyLetters': `Your password includes tricke characters: ${TRICKY_CHARACTERS}`
+          'trickyLetters': `Password includes tricke characters: ${TRICKY_CHARACTERS}`
+        };
+      }
+    }
+    return null;
+  }
+
+  validateNonOverlappingPairs(control: AbstractControl): { [key: string]: any } | null {
+    if (control.touched || control.dirty) {
+      if (!this.includesNonOverlappingPairs(control.value)) {
+        return {
+          'nonOverlappingPairs': `Password must include non-overlapping pairs`
         };
       }
     }
@@ -96,11 +109,14 @@ export class LoginFormComponent implements OnInit {
   includesIncreasingLetters(str: string): boolean {
     let result = false;
     const step = 3;
-    for (let i = 0; i < str.length - step; i++) {
-      const subStr = str.slice(i, i + step);
-      if (ALPHABET.includes(subStr)) {
-        result = true;
-        break;
+    const rowEnd = str.length - step;
+    if (str.length >= 3) {
+      for (let i = 0; i <= rowEnd; i++) {
+        const subStr = str.slice(i, i + step);
+        if (ALPHABET.includes(subStr)) {
+          result = true;
+          break;
+        }
       }
     }
     return result;
@@ -118,8 +134,14 @@ export class LoginFormComponent implements OnInit {
   }
 
   includesNonOverlappingPairs(str: string): boolean {
-
-    return false;
+    let result = false;
+    for (let i = 1; i < str.length; i++) {
+      if (str[i] === str[i - 1]) {
+        result = true;
+        break;
+      }
+    }
+    return result;
   }
 
   includesUpperCaseLetters(str: string): boolean {

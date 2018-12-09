@@ -64,13 +64,25 @@ describe('LoginFormComponent', () => {
 
   it('Password includes only lowercase characters', () => {
     const testCases = [
-      { password: 'qwe4r5ty', result: true },
-      { password: 'qWer42ty', result: false }
+      { password: 'qwe4r5ty', result: false },
+      { password: 'qWer42ty', result: true }
     ];
     testCases.forEach(item => {
       expect(component.includesUpperCaseLetters(item.password)).toBe(item.result);
     });
 
+  });
+
+  it('Check if the pass includes Non-overlapping characters', () => {
+    const testCases = [
+      { password: 'qwer', result: false },
+      { password: 'qqer', result: true },
+      { password: 'qwrr', result: true },
+      { password: 'qwwr', result: true },
+    ];
+    testCases.forEach(item => {
+      expect(component.includesNonOverlappingPairs(item.password)).toBe(item.result);
+    });
   });
 
   it(`Check if the pass includes tricky characters`, () => {
