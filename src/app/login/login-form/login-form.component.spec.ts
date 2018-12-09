@@ -68,7 +68,7 @@ describe('LoginFormComponent', () => {
       { password: 'qWer42ty', result: false }
     ];
     testCases.forEach(item => {
-      expect(component.includesOnlyLoverCaseCharacters(item.password)).toBe(item.result);
+      expect(component.includesUpperCaseLetters(item.password)).toBe(item.result);
     });
 
   });
