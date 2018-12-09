@@ -30,7 +30,27 @@ export class UserService {
   }
 
   addFavoriteJoke(joke: Joke) {
-    this._favoriteJokes.push(joke);
+    if (!this.isFavoriteListFull()) {
+      this._favoriteJokes.push(joke);
+      this.storeFavoriteJokes();
+    }
+  }
+
+  deleteFavoriteJoke(joke: Joke) {
+    const jokeId = this.favoriteJokes.findIndex((item: Joke) => item.id === joke.id);
+    if (jokeId !== -1) {
+      this.favoriteJokes.splice(jokeId, 1);
+      this.storeFavoriteJokes();
+    }
+  }
+
+  clearFavoriteJokes() {
+    this._favoriteJokes = [];
+    localStorage.removeItem('favoriteJokes');
+  }
+
+  isFavoriteListFull(): boolean {
+    return this.favoriteJokes.length === this.favoriteMaxCount;
   }
 
   storeFavoriteJokes(jokes = []) {
